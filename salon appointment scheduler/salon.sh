@@ -76,8 +76,10 @@ BOOK_SERVICE(){
 
   # Write appointment to database
   INSERT_APPOINTMENT=$($PSQL "INSERT INTO appointments (customer_id, service_id , time) VALUES ('$CUSTOMER_ID', '$SERVICE_ID_SELECTED', '$SERVICE_TIME');")
-
-  echo -e "\nI have put you down for a cut at $SERVICE_TIME, $CUSTOMER_NAME."
+  if [[ $INSERT_APPOINTMENT ]]
+  then
+    echo -e "\nI have put you down for a cut at $SERVICE_TIME, $CUSTOMER_NAME."
+  fi
 }
 
 MAIN_MENU
