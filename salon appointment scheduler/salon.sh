@@ -61,9 +61,12 @@ BOOK_SERVICE(){
   # If customer is not in database
   if [[ -z $CUSTOMER_ID ]]
   then
+    # Ask for customer name input
     echo -e "\nI don't have a record for that phone number, what's your name?"
     read CUSTOMER_NAME
+    # Write new customer to database
     INSERT_CUSTOMER=$($PSQL "INSERT INTO customers (phone, name) VALUES ('$CUSTOMER_PHONE', '$CUSTOMER_NAME');")
+    # Read new customer id
     CUSTOMER_ID=$($PSQL "SELECT customer_id FROM customers WHERE phone = '$CUSTOMER_PHONE';")
   else
   # ELSE Read customer name from database
@@ -83,4 +86,3 @@ BOOK_SERVICE(){
 }
 
 MAIN_MENU
-
